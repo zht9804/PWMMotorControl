@@ -60,7 +60,7 @@
 //#define USE_MOTOR_FOR_MELODY        // Generates the tone by using motor coils as tone generator
 //#define ENABLE_PATH_INFO_PAGE       // Saves program memory
 #if defined(CAR_HAS_VIN_VOLTAGE_DIVIDER)
-#define MONITOR_VIN_VOLTAGE
+//#define MONITOR_VIN_VOLTAGE
 #define PRINT_VOLTAGE_PERIOD_MILLIS 2000
 #endif
 

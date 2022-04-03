@@ -701,28 +701,20 @@ void printMotorValuesPeriodically() {
                 char tPWMVoltageString[6];
 #if defined(MONITOR_VIN_VOLTAGE)
             // use current voltage minus bridge loss instead of a constant value
-            dtostrf(
-                    ( ((float)RobotCarPWMMotorControl.leftCarMotor.CompensatedSpeedPWM * (sVINVoltage
-                            - (FULL_BRIDGE_LOSS_MILLIVOLT / 1000.0)))) / MAX_SPEED_PWM, 4, 2, tPWMVoltageString);
+                dtostrf(PWMDcMotor::getMotorVoltageforPWM(RobotCarPWMMotorControl.leftCarMotor.CompensatedSpeedPWM, sVINVoltage) , 4, 2, tPWMVoltageString);
 #else
                 // we can merely use a constant value here
-                dtostrf(
-                        (RobotCarPWMMotorControl.leftCarMotor.CompensatedSpeedPWM * (FULL_BRIDGE_OUTPUT_MILLIVOLT / 1000.0))
-                                / MAX_SPEED_PWM, 4, 2, tPWMVoltageString);
+                dtostrf(PWMDcMotor::getMotorVoltageforPWMAndMillivolt(RobotCarPWMMotorControl.leftCarMotor.CompensatedSpeedPWM, FULL_BRIDGE_INPUT_MILLIVOLT), 4, 2, tPWMVoltageString);
 #endif
                 tPWMVoltageString[4] = 'V';
                 tPWMVoltageString[5] = '\0';
                 BlueDisplay1.drawText((MOTOR_INFO_START_X + TEXT_SIZE_11_WIDTH) - 1, MOTOR_INFO_START_Y + (2 * TEXT_SIZE_11),
                         tPWMVoltageString);
 #if defined(MONITOR_VIN_VOLTAGE)
-                dtostrf(
-                        ( ((float) RobotCarPWMMotorControl.rightCarMotor.CompensatedSpeedPWM * (sVINVoltage
-                                - (FULL_BRIDGE_LOSS_MILLIVOLT / 1000.0)))) / MAX_SPEED_PWM, 4, 2, tPWMVoltageString);
+                dtostrf(PWMDcMotor::getMotorVoltageforPWM(RobotCarPWMMotorControl.rightCarMotor.CompensatedSpeedPWM, sVINVoltage), 4, 2, tPWMVoltageString);
 #else
                 // we can merely use a constant value here
-                dtostrf(
-                        (RobotCarPWMMotorControl.rightCarMotor.CompensatedSpeedPWM * (FULL_BRIDGE_OUTPUT_MILLIVOLT / 1000.0))
-                                / MAX_SPEED_PWM, 4, 2, tPWMVoltageString);
+                dtostrf(PWMDcMotor::getMotorVoltageforPWMAndMillivolt(RobotCarPWMMotorControl.rightCarMotor.CompensatedSpeedPWM, FULL_BRIDGE_INPUT_MILLIVOLT), 4, 2, tPWMVoltageString);
 #endif
                 tPWMVoltageString[4] = 'V';
                 BlueDisplay1.drawText((MOTOR_INFO_START_X + (7 * TEXT_SIZE_11_WIDTH)) - 3, MOTOR_INFO_START_Y + (2 * TEXT_SIZE_11),
